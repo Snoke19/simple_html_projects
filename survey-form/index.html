@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Survey Form</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1 id="title" class="text-center">Survey Form</h1>
+        <p id="description" class="text-center description">Thank you for taking the time to help us improve the
+            platform</p>
+    </header>
+    <form id="survey-form">
+        <!-- Personal Information -->
+        <fieldset id="personal-info">
+            <label id="name-label" for="name"> Name
+                <input id="name" type="text" placeholder="Enter your name" required/>
+            </label>
+            <label id="email-label" for="email"> Email
+                <input id="email" type="email" placeholder="Enter your email" required/>
+            </label>
+            <label id="number-label" for="number"> Age (optional)
+                <input id="number" type="number" placeholder="Age" min="0" max="150"/>
+            </label>
+            <label id="select-dropdown" for="dropdown"> Current Role
+                <select id="dropdown">
+                    <option>Student</option>
+                    <option>Full Time Job</option>
+                </select>
+            </label>
+        </fieldset>
+
+        <!-- Recommendation -->
+        <fieldset id="recommendation">
+            <legend>Would you recommend freeCodeCamp to a friend?</legend>
+            <label id="radio-definitely" for="definitely">
+                <input id="definitely" type="radio" value="definitely" name="recommend-pick" checked/>Definitely
+            </label>
+            <label id="maybe-definitely" for="maybe">
+                <input id="maybe" type="radio" value="maybe" name="recommend-pick" class="inline"/>Maybe
+            </label>
+            <label id="not-sure-definitely" for="not-sure">
+                <input id="not-sure" type="radio" value="not-sure" name="recommend-pick" class="inline"/>Not sure
+            </label>
+        </fieldset>
+
+        <!-- Improvement Suggestions -->
+        <fieldset id="improvement-suggestions">
+            <legend>What would you like to see improved? (Check all that apply)</legend>
+            <label id="id-front-end-projects" for="front-end-projects">
+                <input id="front-end-projects" value="front-end-projects" type="checkbox"> Front-end Projects
+            </label>
+            <label id="id-back-end-projects" for="back-end-projects">
+                <input id="back-end-projects" value="back-end-projects" type="checkbox"> Back-end Projects
+            </label>
+            <label id="id-data-visualization" for="data-visualization">
+                <input id="data-visualization" value="data-visualization" type="checkbox"> Data Visualization
+            </label>
+        </fieldset>
+
+        <!-- Comments or Suggestions -->
+        <fieldset id="comments-suggestions">
+            <legend>Any comments or suggestions?</legend>
+            <label for="suggestions">
+                <textarea id="suggestions" placeholder="Enter your comment here..."></textarea>
+            </label>
+        </fieldset>
+
+        <!-- Submit Button -->
+        <fieldset id="group-submit">
+            <button id="submit" type="submit">Submit</button>
+        </fieldset>
+    </form>
+</div>
+</body>
+</html>
