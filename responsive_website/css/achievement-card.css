@@ -1,0 +1,58 @@
+.achievement-card {
+    position: absolute;
+    min-width: 200px;
+    color: var(--dark-blue-color);
+}
+
+.achievement-card .content {
+    border-radius: 24px;
+    background: #fff;
+    padding: 8px 32px;
+    z-index: 10;
+    position: relative;
+}
+
+.achievement-card.students-enrolled {
+    filter: drop-shadow(10px 10px 0px #000000);
+    left: 49%;
+    top: 270px;
+    width: 206px;
+    height: 90px;
+}
+
+.achievement-card.overall-rating {
+    filter: drop-shadow(10px 10px 0px #000000);
+    left: 47%;
+    top: 470px;
+    width: 183px;
+    height: 90px;
+}
+
+.achievement-card .content div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.achievement-card h3 {
+    font-weight: bold;
+    font-size: 36px;
+    margin: 0;
+    text-align: center;
+    width: 100%;
+    flex: 1;
+}
+
+.achievement-card img {
+    flex: 1;
+    height: 42px;
+    margin-left: -24px;
+}
+
+.achievement-card p {
+    font-weight: normal;
+    font-size: 16px;
+    margin-top: -8px;
+    margin-bottom: 8px;
+    text-align: center;
+}
