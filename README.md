@@ -1,3 +1,1 @@
-```html
-https://github.com/Snoke19/simple_html_projects/blob/d23915d2a08143c98f6d7e5a8dc48121ab1193ce/balance_sheet/index.html
-```
+
