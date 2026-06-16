@@ -86,7 +86,7 @@ const products = [
 ];
 
 products.forEach(
-    ({ name, id, price, category }) => {
+    ({name, id, price, category}) => {
         dessertCards.innerHTML += `
       <div class="dessert-card">
         <h2>${name}</h2>
@@ -110,7 +110,7 @@ class ShoppingCart {
 
     addItem(id, products) {
         const product = products.find((item) => item.id === id);
-        const { name, price } = product;
+        const {name, price} = product;
         this.items.push(product);
 
         const totalCountPerProduct = {};
@@ -171,7 +171,7 @@ class ShoppingCart {
         cartTotal.textContent = `$${this.total.toFixed(2)}`;
         return this.total;
     }
-};
+}
 
 const cart = new ShoppingCart();
 const addToCartBtns = document.getElementsByClassName("add-to-cart-btn");

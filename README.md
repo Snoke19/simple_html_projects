@@ -9,6 +9,22 @@ only vanilla JS/HTML/CSS.
 
 ## Projects
 
+### Product page
+
+Simple product page with stock
+
+![Product page](screenshots/product_page_stock.png)
+
+---
+
+### Leverage system
+
+Simple leverage system page
+
+![Product page](screenshots/leverage.png)
+
+---
+
 ### Balance Sheet
 
 Simple balance sheet webpage with HTML and CSS styling.
@@ -94,12 +110,6 @@ Interactive coffee menu for a cafe.
 Color markers and drawing tools project.
 
 ![Color Markers](screenshots/color_markers.png)
-
----
-
-### CSS Box Model
-
-Demonstration of CSS box model concepts.
 
 ---
 
@@ -225,8 +235,7 @@ Converts numbers to Roman numerals.
 
 Online shopping cart functionality.
 
-**Screenshot:**
-(Add screenshot here)
+![Shopping Cart](screenshots/shopping_cart.png)
 
 ---
 
@@ -234,8 +243,7 @@ Online shopping cart functionality.
 
 Filters spam messages or content.
 
-**Screenshot:**
-(Add screenshot here)
+![Spam Filter](screenshots/spam_filter.png)
 
 ---
 
@@ -243,17 +251,15 @@ Filters spam messages or content.
 
 Calculates various statistical values.
 
-**Screenshot:**
-(Add screenshot here)
+![Statistics Calculator](screenshots/statistics_calculator.png)
 
 ---
 
-### Study
+### Recipe
 
-Study/learning materials or notes.
+Recipe page.
 
-**Screenshot:**
-(Add screenshot here)
+![Statistics Calculator](screenshots/recipe.png)
 
 ---
 
@@ -261,8 +267,7 @@ Study/learning materials or notes.
 
 Form for collecting user survey responses.
 
-**Screenshot:**
-(Add screenshot here)
+![Survey Form](screenshots/survey-form.png)
 
 ---
 
@@ -270,8 +275,7 @@ Form for collecting user survey responses.
 
 Technical documentation with search and navigation.
 
-**Screenshot:**
-(Add screenshot here)
+![Technical Documentation Page](screenshots/technical_documentation_page.png)
 
 ---
 
@@ -279,8 +283,7 @@ Technical documentation with search and navigation.
 
 Simple todo list application.
 
-**Screenshot:**
-(Add screenshot here)
+![Todo App](screenshots/todo_app.png)
 
 ---
 
@@ -288,7 +291,6 @@ Simple todo list application.
 
 Tribute page honoring a person or subject.
 
-**Screenshot:**
-(Add screenshot here)
+![Tribute Page](screenshots/tribute_page.png)
 
 ---
