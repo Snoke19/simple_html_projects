@@ -186,6 +186,7 @@ body {
     cursor: pointer;
     transition: all var(--transition-fast);
     text-align: center;
+    position: relative;
 }
 
 .product-card:hover {
@@ -216,6 +217,23 @@ body {
     font-size: 0.875rem;
     color: var(--success-color);
     font-weight: 600;
+}
+
+.product-card .product-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: var(--shadow-sm);
 }
 
 .total-display {

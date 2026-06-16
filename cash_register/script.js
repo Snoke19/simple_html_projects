@@ -57,48 +57,7 @@ const state = {
 };
 
 // ===== DOM Elements =====
-const elements = {
-    // Products
-    productsGrid: document.getElementById('products-grid'),
-    totalAmount: document.getElementById('total-amount'),
-    
-    // Register
-    itemDisplay: document.getElementById('item-display'),
-    priceDisplay: document.getElementById('price-display'),
-    cashInput: document.getElementById('cash-input'),
-    purchaseBtn: document.getElementById('purchase-btn'),
-    
-    // Drawer
-    drawerContents: document.getElementById('drawer-contents'),
-    drawerTotal: document.getElementById('drawer-total'),
-    drawerToggle: document.getElementById('drawer-toggle'),
-    drawerDisplay: document.getElementById('drawer-display'),
-    
-    // Transactions
-    transactionsList: document.getElementById('transactions-list'),
-    clearHistoryBtn: document.getElementById('clear-history-btn'),
-    
-    // Modals
-    changeModal: document.getElementById('change-modal'),
-    changeResults: document.getElementById('change-results'),
-    modalClose: document.getElementById('modal-close'),
-    closeModalBtn: document.getElementById('close-modal-btn'),
-    printReceiptBtn: document.getElementById('print-receipt-btn'),
-    
-    receiptModal: document.getElementById('receipt-modal'),
-    receiptPreview: document.getElementById('receipt-preview'),
-    receiptModalClose: document.getElementById('receipt-modal-close'),
-    closeReceiptModal: document.getElementById('close-receipt-modal'),
-    printReceiptFinal: document.getElementById('print-receipt-final'),
-    
-    // Notifications
-    notification: document.getElementById('notification'),
-    notificationMessage: document.getElementById('notification-message'),
-    
-    // Controls
-    themeToggle: document.getElementById('theme-toggle'),
-    resetBtn: document.getElementById('reset-btn')
-};
+let elements = {};
 
 // ===== Utility Functions =====
 const utils = {
@@ -271,7 +230,7 @@ const cashDrawer = {
 const products = {
     getAll: () => CONFIG.PRODUCTS,
     
-    getById: (id) => CONFIG.PRODUCTS.find(p => p.id === id),
+    getById: (id) => CONFIG.PRODUCTS.find(p => p.id === Number(id)),
     
     addToCart: (product) => {
         state.cart.push(product);
@@ -357,8 +316,6 @@ const ui = {
                 <div class="product-price">${utils.formatDisplay(utils.toDollars(product.price))}</div>
                 ${cartCount > 0 ? `<div class="product-count">${cartCount}</div>` : ''}
             `;
-            
-            productCard.addEventListener('click', () => ui.handleProductClick(product));
             
             elements.productsGrid.appendChild(productCard);
         });
@@ -952,6 +909,56 @@ const eventListeners = {
 
 // ===== Initialize Application =====
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize DOM elements
+    elements = {
+        // Products
+        productsGrid: document.getElementById('products-grid'),
+        totalAmount: document.getElementById('total-amount'),
+        
+        // Register
+        itemDisplay: document.getElementById('item-display'),
+        priceDisplay: document.getElementById('price-display'),
+        cashInput: document.getElementById('cash-input'),
+        purchaseBtn: document.getElementById('purchase-btn'),
+        
+        // Drawer
+        drawerContents: document.getElementById('drawer-contents'),
+        drawerTotal: document.getElementById('drawer-total'),
+        drawerToggle: document.getElementById('drawer-toggle'),
+        drawerDisplay: document.getElementById('drawer-display'),
+        
+        // Transactions
+        transactionsList: document.getElementById('transactions-list'),
+        clearHistoryBtn: document.getElementById('clear-history-btn'),
+        
+        // Modals
+        changeModal: document.getElementById('change-modal'),
+        changeResults: document.getElementById('change-results'),
+        modalClose: document.getElementById('modal-close'),
+        closeModalBtn: document.getElementById('close-modal-btn'),
+        printReceiptBtn: document.getElementById('print-receipt-btn'),
+        
+        receiptModal: document.getElementById('receipt-modal'),
+        receiptPreview: document.getElementById('receipt-preview'),
+        receiptModalClose: document.getElementById('receipt-modal-close'),
+        closeReceiptModal: document.getElementById('close-receipt-modal'),
+        printReceiptFinal: document.getElementById('print-receipt-final'),
+        
+        // Notifications
+        notification: document.getElementById('notification'),
+        notificationMessage: document.getElementById('notification-message'),
+        
+        // Controls
+        themeToggle: document.getElementById('theme-toggle'),
+        resetBtn: document.getElementById('reset-btn')
+    };
+    
+    // Verify elements are loaded
+    if (!elements.productsGrid) {
+        console.error('Products grid element not found!');
+        return;
+    }
+    
     ui.init();
     eventListeners.init();
 });
