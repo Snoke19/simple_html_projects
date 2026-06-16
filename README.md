@@ -2,85 +2,87 @@
 
 Collection of various HTML/CSS/JavaScript projects for learning and practice.
 
-**Note:** This project is for learning and improving knowledge about JavaScript, HTML, and CSS. No frameworks are used - only vanilla JS/HTML/CSS.
+**Note:** This project is for learning and improving knowledge about JavaScript, HTML, and CSS. No frameworks are used -
+only vanilla JS/HTML/CSS.
 
 ---
 
 ## Projects
 
 ### Balance Sheet
+
 Simple balance sheet webpage with HTML and CSS styling.
 
-**Screenshot:**
-![Balance Sheet](./screenshots/balance_sheet.png)
+![Balance Sheet](screenshots/balance_sheet.png)
 
 ---
 
-### Building fCC Forum Leaderboard
-FreeCodeCamp forum leaderboard project.
+### Building Forum Leaderboard
 
-**Screenshot:**
-(Add screenshot here)
+Forum leaderboard project.
+
+![Building fCC Forum Leaderboard](./screenshots/building_fCC_forum_leaderboard.png)
 
 ---
 
 ### Building Number Sorter
+
 Application that sorts building numbers.
 
-**Screenshot:**
-(Add screenshot here)
+![Building fCC Forum Leaderboard](./screenshots/building_number_sorter.png)
 
 ---
 
 ### Building Penguin
+
 Penguin-themed project.
 
-**Screenshot:**
-(Add screenshot here)
+![Building Penguin](screenshots/building_penguin.gif)
 
 ---
 
 ### Building Spreadsheet
+
 Spreadsheet application built with HTML/CSS/JS.
 
-**Screenshot:**
-(Add screenshot here)
+![Building Penguin](screenshots/building_spreadsheet.png)
 
 ---
 
 ### Cash Register
+
 Cash register simulator for handling transactions.
 
-**Screenshot:**
-(Add screenshot here)
+![Cash Register](screenshots/cash_register.png)
 
 ---
 
 ### Cat Painting
+
 Digital cat painting display page.
 
-**Screenshot:**
-(Add screenshot here)
+![Cat Painting](screenshots/cat_painting.png)
 
 ---
 
 ### Cat Photo Gallery
+
 Gallery showcasing cat photos.
 
-**Screenshot:**
-(Add screenshot here)
+![Cat Photo Gallery](screenshots/cat_photo_gallery.png)
 
 ---
 
 ### City Skyline
+
 City skyline visualization project.
 
-**Screenshot:**
-(Add screenshot here)
+![Cat Photo Gallery](screenshots/city_skyline.png)
 
 ---
 
 ### Coffee Menu
+
 Interactive coffee menu for a cafe.
 
 **Screenshot:**
@@ -89,6 +91,7 @@ Interactive coffee menu for a cafe.
 ---
 
 ### Color Markers
+
 Color markers and drawing tools project.
 
 **Screenshot:**
@@ -97,6 +100,7 @@ Color markers and drawing tools project.
 ---
 
 ### CSS Box Model
+
 Demonstration of CSS box model concepts.
 
 **Screenshot:**
@@ -105,6 +109,7 @@ Demonstration of CSS box model concepts.
 ---
 
 ### Decimal to Binary Converter
+
 Tool to convert decimal numbers to binary.
 
 **Screenshot:**
@@ -113,6 +118,7 @@ Tool to convert decimal numbers to binary.
 ---
 
 ### Dice Game
+
 Simple dice rolling game.
 
 **Screenshot:**
@@ -121,6 +127,7 @@ Simple dice rolling game.
 ---
 
 ### Ferris Wheel
+
 Ferris wheel animation or visualization.
 
 **Screenshot:**
@@ -129,6 +136,7 @@ Ferris wheel animation or visualization.
 ---
 
 ### Fetch Promises Building Authors Page
+
 Project using fetch API and promises to display authors.
 
 **Screenshot:**
@@ -137,6 +145,7 @@ Project using fetch API and promises to display authors.
 ---
 
 ### Gallery Start
+
 Basic gallery starter project.
 
 **Screenshot:**
@@ -145,6 +154,7 @@ Basic gallery starter project.
 ---
 
 ### Magazine
+
 Digital magazine layout project.
 
 **Screenshot:**
@@ -153,6 +163,7 @@ Digital magazine layout project.
 ---
 
 ### Number Validator
+
 Validates various number formats.
 
 **Screenshot:**
@@ -161,6 +172,7 @@ Validates various number formats.
 ---
 
 ### Nutrition Label
+
 Nutrition facts label display.
 
 **Screenshot:**
@@ -169,6 +181,7 @@ Nutrition facts label display.
 ---
 
 ### Piano
+
 Virtual piano with playable keys.
 
 **Screenshot:**
@@ -177,6 +190,7 @@ Virtual piano with playable keys.
 ---
 
 ### Platformer Game
+
 2D platformer game built with JavaScript.
 
 **Screenshot:**
@@ -185,6 +199,7 @@ Virtual piano with playable keys.
 ---
 
 ### Pokemon Project
+
 Pokemon-themed application or game.
 
 **Screenshot:**
@@ -193,6 +208,7 @@ Pokemon-themed application or game.
 ---
 
 ### Products Page
+
 E-commerce products display page.
 
 **Screenshot:**
@@ -201,6 +217,7 @@ E-commerce products display page.
 ---
 
 ### Product Landing Page
+
 Landing page for a product.
 
 **Screenshot:**
@@ -209,6 +226,7 @@ Landing page for a product.
 ---
 
 ### Registration Form
+
 User registration form with validation.
 
 **Screenshot:**
@@ -217,6 +235,7 @@ User registration form with validation.
 ---
 
 ### Responsive Website
+
 Website that adapts to different screen sizes.
 
 **Screenshot:**
@@ -225,6 +244,7 @@ Website that adapts to different screen sizes.
 ---
 
 ### Roman Numeral Converter
+
 Converts numbers to Roman numerals.
 
 **Screenshot:**
@@ -233,6 +253,7 @@ Converts numbers to Roman numerals.
 ---
 
 ### Shopping Cart
+
 Online shopping cart functionality.
 
 **Screenshot:**
@@ -241,6 +262,7 @@ Online shopping cart functionality.
 ---
 
 ### Spam Filter
+
 Filters spam messages or content.
 
 **Screenshot:**
@@ -249,6 +271,7 @@ Filters spam messages or content.
 ---
 
 ### Statistics Calculator
+
 Calculates various statistical values.
 
 **Screenshot:**
@@ -257,6 +280,7 @@ Calculates various statistical values.
 ---
 
 ### Study
+
 Study/learning materials or notes.
 
 **Screenshot:**
@@ -265,6 +289,7 @@ Study/learning materials or notes.
 ---
 
 ### Survey Form
+
 Form for collecting user survey responses.
 
 **Screenshot:**
@@ -273,6 +298,7 @@ Form for collecting user survey responses.
 ---
 
 ### Technical Documentation Page
+
 Technical documentation with search and navigation.
 
 **Screenshot:**
@@ -281,6 +307,7 @@ Technical documentation with search and navigation.
 ---
 
 ### Todo App
+
 Simple todo list application.
 
 **Screenshot:**
@@ -289,6 +316,7 @@ Simple todo list application.
 ---
 
 ### Tribute Page
+
 Tribute page honoring a person or subject.
 
 **Screenshot:**
