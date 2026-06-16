@@ -171,7 +171,7 @@ body {
 
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-sm);
     max-height: 400px;
     overflow-y: auto;
@@ -878,7 +878,7 @@ body {
     }
     
     .products-grid {
-        grid-template-columns: repeat(6, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
     
     .main-content {
@@ -896,7 +896,7 @@ body {
 
 @media (max-width: 480px) {
     .products-grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
     
     .register-container {

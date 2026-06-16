@@ -889,6 +889,7 @@ const eventListeners = {
             case 'SUCCESS':
                 ui.updateDrawerDisplay();
                 ui.updateCartDisplay();
+                ui.renderProducts();
                 ui.updateTransactionsDisplay();
                 ui.showChangeModal(result, result.transaction);
                 ui.showNotification('Transaction completed!');
