@@ -128,7 +128,8 @@ const ui = {
                     </div>
                     <div class="transaction-body">
                         ${tx.status === 'SUCCESS' ? `
-                            <p><strong>${tx.itemName}</strong> - ${utils.formatDisplay(tx.amount)}</p>
+                            <strong>${tx.itemsCart.map(item => `${item.name} - ${utils.formatDisplay(utils.toDollars(item.price))}`).join('<br>')}</strong>
+                            <p>Amount: ${utils.formatDisplay(tx.amount)}</p>
                             <p>Paid: ${utils.formatDisplay(tx.paid)}</p>
                             <p>Change: ${utils.formatDisplay(tx.change)}</p>
                         ` : `
@@ -265,8 +266,7 @@ const ui = {
 
     // Load theme from localStorage
     loadTheme: () => {
-        const savedTheme = localStorage.getItem('cash-register-theme') || 'light';
-        state.theme = savedTheme;
+        state.theme = localStorage.getItem('cash-register-theme') || 'light';
         document.documentElement.setAttribute('data-theme', state.theme);
 
         const icon = elements.themeToggle.querySelector('i');
@@ -311,37 +311,6 @@ const businessLogic = {
             return {
                 status: 'INSUFFICIENT_PAYMENT',
                 message: `Customer needs $${utils.formatDisplay(utils.toDollars(totalAmountCents - cashReceivedCents))} more`
-            };
-        }
-
-        // Check if exact payment
-        if (cashReceivedCents === totalAmountCents) {
-            // No change needed, but still need to check if drawer can be closed
-            const totalCid = cashDrawer.getTotal();
-
-            // Add payment to drawer
-            cashDrawer.addToDrawer('ONE', utils.toDollars(cashReceivedCents));
-
-            const transaction = {
-                status: 'SUCCESS',
-                itemName: state.cart.map(p => p.name).join(', '),
-                amount: utils.toDollars(totalAmountCents),
-                paid: cashReceivedDollars,
-                change: 0,
-                changeBreakdown: [],
-                changeAmount: 0,
-                paymentMethod: 'Cash'
-            };
-
-            transactions.add(transaction);
-            products.clearCart();
-
-            return {
-                status: 'SUCCESS',
-                message: 'Exact payment - no change due',
-                change: [],
-                changeAmount: 0,
-                transaction
             };
         }
 
@@ -401,9 +370,7 @@ const businessLogic = {
         // Create transaction
         const transaction = {
             status: 'SUCCESS',
-            itemName: state.cart.length === 1 ?
-                state.cart[0].name :
-                `${state.cart.length} items`,
+            itemsCart: state.cart,
             amount: utils.toDollars(totalAmountCents),
             paid: cashReceivedDollars,
             change: changeDueDollars,
@@ -481,7 +448,7 @@ const eventListeners = {
                 const printWindow = window.open('', '_blank');
                 const receiptHTML = `
                     <!DOCTYPE html>
-                    <html>
+                    <html lang="en">
                     <head>
                         <title>Receipt - ${transaction.id}</title>
                         <style>

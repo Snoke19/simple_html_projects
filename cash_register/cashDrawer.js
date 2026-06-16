@@ -20,7 +20,6 @@ const cashDrawer = {
     // Check if drawer can provide change
     canProvideChange: (changeDueCents) => {
         const tempCid = utils.deepClone(state.cid);
-        console.log(tempCid);
         let remainingChange = changeDueCents;
 
         // Sort by highest denomination first

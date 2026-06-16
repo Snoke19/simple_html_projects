@@ -511,7 +511,7 @@ body {
 }
 
 .transactions-list {
-    max-height: 400px;
+    max-height: 610px;
     overflow-y: auto;
     padding-right: var(--spacing-xs);
     margin-bottom: var(--spacing-md);
