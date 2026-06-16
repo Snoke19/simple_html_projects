@@ -3,137 +3,296 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Cash Register</title>
+    <title>Cash Register Pro</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap"
+          rel="stylesheet">
     <link rel="stylesheet" href="./styles.css"/>
+    <base target="_blank">
 </head>
-
 <body>
-<div class="app-container">
-    <header class="header">
-        <div class="logo">
-            <i class="fas fa-cash-register"></i>
-            <h1>Cash Register</h1>
+<!-- Ambient background -->
+<div class="ambient-bg">
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
+    <div class="ambient-grid"></div>
+</div>
+
+<div class="app-wrapper">
+    <!-- Top Bar -->
+    <header class="top-bar">
+        <div class="brand">
+            <div class="brand-mark">
+                <i class="fas fa-cash-register"></i>
+            </div>
+            <div class="brand-text">
+                <span class="brand-name">Cash Register</span>
+                <span class="brand-badge">PRO</span>
+            </div>
         </div>
-        <div class="header-controls">
-            <button id="theme-toggle" class="icon-btn" title="Toggle theme">
+
+        <div class="top-bar-center">
+            <div class="live-indicator">
+                <span class="live-dot"></span>
+                <span class="live-time" id="live-time">--:--:--</span>
+            </div>
+            <div class="sales-counter">
+                <i class="fas fa-chart-line"></i>
+                <span id="sales-count">0 sales today</span>
+            </div>
+        </div>
+
+        <div class="top-bar-actions">
+            <button class="action-btn" id="theme-toggle" title="Toggle theme">
                 <i class="fas fa-moon"></i>
             </button>
-            <button id="reset-btn" class="icon-btn" title="Reset drawer">
-                <i class="fas fa-redo"></i>
+            <button class="action-btn" id="reset-btn" title="Reset drawer">
+                <i class="fas fa-rotate"></i>
             </button>
         </div>
     </header>
 
-    <main class="main-content">
-        <section class="products-section">
-            <h2><i class="fas fa-box-open"></i> Products</h2>
-            <div class="products-grid" id="products-grid"></div>
+    <!-- Main Workspace -->
+    <main class="workspace">
+        <!-- Left: Products -->
+        <section class="panel panel-products">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <div class="panel-icon">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <h2>Products</h2>
+                </div>
+                <div class="panel-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="product-search" placeholder="Find product...">
+                </div>
+            </div>
+
+            <div class="products-scroll">
+                <div class="products-grid" id="products-grid"></div>
+            </div>
+
+            <div class="cart-bar">
+                <div class="cart-info">
+                    <i class="fas fa-shopping-basket"></i>
+                    <span id="cart-summary">0 items</span>
+                </div>
+                <div class="cart-total">
+                    <span class="cart-total-label">Total</span>
+                    <span class="cart-total-value" id="cart-total-display">$0.00</span>
+                </div>
+            </div>
         </section>
 
-        <section class="register-section">
-            <div class="register-container">
-                <div class="display-screen">
-                    <div class="screen-content">
-                        <div class="item-display" id="item-display">Select a product</div>
-                        <div class="price-display" id="price-display">$0.00</div>
+        <!-- Center: Register -->
+        <section class="panel panel-register">
+            <div class="register-frame">
+                <!-- Display -->
+                <div class="register-display">
+                    <div class="display-frame">
+                        <div class="display-header">
+                            <span class="display-tag">CURRENT SALE</span>
+                            <span class="display-status" id="register-status">READY</span>
+                        </div>
+                        <div class="display-main">
+                            <div class="display-item" id="item-display">Tap a product to start</div>
+                            <div class="display-price" id="price-display">$0.00</div>
+                        </div>
+                        <div class="display-meta">
+                            <div class="meta-row">
+                                <span>Items</span>
+                                <span id="meta-items">0</span>
+                            </div>
+                            <div class="meta-row">
+                                <span>Tax</span>
+                                <span id="meta-tax">$0.00</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="input-section">
-                    <div class="input-group">
-                        <label for="cash-input">Cash Received:</label>
-                        <div class="input-wrapper">
-                            <span class="currency-symbol">$</span>
-                            <input
-                                    type="number"
-                                    id="cash-input"
-                                    class="cash-input"
-                                    placeholder="0.00"
-                                    step="0.01"
-                                    min="0"
-                            />
-                        </div>
+                <!-- Quick Cash -->
+                <div class="quick-cash-row">
+                    <button class="chip-btn" data-amount="5">+$5</button>
+                    <button class="chip-btn" data-amount="10">+$10</button>
+                    <button class="chip-btn" data-amount="20">+$20</button>
+                    <button class="chip-btn" data-amount="50">+$50</button>
+                    <button class="chip-btn" data-amount="100">+$100</button>
+                </div>
+
+                <!-- Cash Input -->
+                <div class="input-block">
+                    <label class="input-label">
+                        <i class="fas fa-hand-holding-dollar"></i>
+                        Cash Received
+                    </label>
+                    <div class="input-field">
+                        <span class="input-prefix">$</span>
+                        <input
+                                type="number"
+                                id="cash-input"
+                                class="cash-input"
+                                placeholder="0.00"
+                                step="0.01"
+                                min="0"
+                        />
+                        <button class="input-suffix" id="clear-cash">
+                            <i class="fas fa-times"></i>
+                        </button>
                     </div>
-                    <button id="purchase-btn" class="purchase-btn">
-                        <i class="fas fa-shopping-cart"></i> Complete Sale
+                </div>
+
+                <!-- Change Preview -->
+                <div class="change-hint" id="change-hint">
+                    <span class="change-hint-label">Change</span>
+                    <span class="change-hint-value" id="change-hint-value">$0.00</span>
+                </div>
+
+                <!-- Actions -->
+                <div class="action-row">
+                    <button class="btn-main" id="purchase-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Complete Sale</span>
+                    </button>
+                    <button class="btn-ghost" id="clear-cart-btn" title="Clear cart">
+                        <i class="fas fa-trash-can"></i>
                     </button>
                 </div>
 
-                <div class="drawer-display" id="drawer-display">
-                    <h3><i class="fas fa-dollar-sign"></i> Cash Drawer</h3>
-                    <div class="drawer-contents" id="drawer-contents"></div>
-                    <div class="drawer-total">
-                        <span>Total in Drawer:</span>
+                <!-- Drawer -->
+                <div class="drawer-panel" id="drawer-panel">
+                    <div class="drawer-header">
+                        <div class="drawer-title">
+                            <i class="fas fa-vault"></i>
+                            <span>Cash Drawer</span>
+                        </div>
+                        <span class="drawer-badge" id="drawer-badge">Open</span>
+                    </div>
+                    <div class="drawer-body" id="drawer-contents"></div>
+                    <div class="drawer-footer">
+                        <span>Total</span>
                         <span id="drawer-total">$0.00</span>
                     </div>
                 </div>
 
-                <div class="drawer-toggle-container">
-                    <button id="drawer-toggle" class="drawer-toggle">
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                </div>
+                <button class="drawer-toggle" id="drawer-toggle">
+                    <i class="fas fa-chevron-down"></i>
+                    <span>Toggle Drawer</span>
+                </button>
             </div>
         </section>
 
-        <section class="transactions-section">
-            <h2><i class="fas fa-history"></i> Transaction History</h2>
-            <div class="transactions-list" id="transactions-list">
-                <div class="empty-state">
-                    <i class="fas fa-receipt"></i>
-                    <p>No transactions yet</p>
+        <!-- Right: Transactions -->
+        <section class="panel panel-history">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <div class="panel-icon">
+                        <i class="fas fa-clock-rotate-left"></i>
+                    </div>
+                    <h2>History</h2>
+                </div>
+                <div class="filter-pills">
+                    <button class="pill active" data-filter="all">All</button>
+                    <button class="pill" data-filter="success">Done</button>
+                    <button class="pill" data-filter="insufficient">Fail</button>
                 </div>
             </div>
-            <button id="clear-history-btn" class="clear-btn">
-                <i class="fas fa-trash"></i> Clear History
-            </button>
+
+            <div class="history-scroll">
+                <div class="transactions-list" id="transactions-list">
+                    <div class="empty-state">
+                        <div class="empty-ring">
+                            <i class="fas fa-receipt"></i>
+                        </div>
+                        <p>No transactions yet</p>
+                        <span>Complete a sale to see history</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="history-footer">
+                <div class="revenue">
+                    <span class="revenue-label">Today's Revenue</span>
+                    <span class="revenue-value" id="revenue-value">$0.00</span>
+                </div>
+                <button class="btn-danger" id="clear-history-btn">
+                    <i class="fas fa-trash"></i>
+                    <span>Clear</span>
+                </button>
+            </div>
         </section>
     </main>
+</div>
 
-    <div class="modal" id="change-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Change Due</h3>
-                <button class="modal-close" id="modal-close">&times;</button>
+<!-- Change Modal -->
+<div class="modal" id="change-modal">
+    <div class="modal-shade"></div>
+    <div class="modal-card">
+        <div class="modal-top">
+            <div class="modal-avatar success">
+                <i class="fas fa-check"></i>
             </div>
-            <div class="modal-body" id="change-results"></div>
-            <div class="modal-footer">
-                <button id="print-receipt-btn" class="btn btn-secondary">
-                    <i class="fas fa-print"></i> Print Receipt
-                </button>
-                <button id="close-modal-btn" class="btn btn-primary">
-                    <i class="fas fa-check"></i> OK
-                </button>
-            </div>
+            <h3>Change Breakdown</h3>
+            <button class="modal-dismiss" id="modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-mid" id="change-results"></div>
+        <div class="modal-bot">
+            <button class="btn-secondary" id="print-receipt-btn">
+                <i class="fas fa-print"></i>
+                Print
+            </button>
+            <button class="btn-primary" id="close-modal-btn">
+                <i class="fas fa-check"></i>
+                Done
+            </button>
         </div>
     </div>
+</div>
 
-    <div class="modal" id="receipt-modal">
-        <div class="modal-content receipt-content">
-            <div class="modal-header">
-                <h3>Receipt</h3>
-                <button class="modal-close" id="receipt-modal-close">&times;</button>
+<!-- Receipt Modal -->
+<div class="modal" id="receipt-modal">
+    <div class="modal-shade"></div>
+    <div class="modal-card modal-card--narrow">
+        <div class="modal-top">
+            <div class="modal-avatar">
+                <i class="fas fa-receipt"></i>
             </div>
-            <div class="modal-body" id="receipt-preview"></div>
-            <div class="modal-footer">
-                <button id="print-receipt-final" class="btn btn-primary">
-                    <i class="fas fa-print"></i> Print
-                </button>
-                <button id="close-receipt-modal" class="btn btn-secondary">
-                    Close
-                </button>
-            </div>
+            <h3>Receipt</h3>
+            <button class="modal-dismiss" id="receipt-modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-mid" id="receipt-preview"></div>
+        <div class="modal-bot">
+            <button class="btn-primary" id="print-receipt-final">
+                <i class="fas fa-print"></i>
+                Print
+            </button>
+            <button class="btn-secondary" id="close-receipt-modal">
+                Close
+            </button>
         </div>
     </div>
+</div>
 
-    <div class="notification" id="notification">
+<!-- Toast Notification -->
+<div class="toast" id="notification">
+    <div class="toast-icon">
         <i class="fas fa-check-circle"></i>
-        <span id="notification-message"></span>
     </div>
+    <div class="toast-body">
+        <span class="toast-title" id="notification-title">Success</span>
+        <span class="toast-msg" id="notification-message"></span>
+    </div>
+    <button class="toast-close" id="notification-close">
+        <i class="fas fa-times"></i>
+    </button>
 </div>
 
 <script type="module" src="./script.js"></script>
 </body>
-
 </html>
