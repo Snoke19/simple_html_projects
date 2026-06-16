@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CoreLedger Production Audit | System of Record</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .font-mono {
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        }
+
+        .ledger-row:hover {
+            background-color: rgba(30, 41, 59, 0.5);
+        }
+    </style>
+</head>
+
+<body class="bg-[#0f172a] text-slate-300 font-sans antialiased">
+
+    <header class="border-b border-slate-800 bg-[#1e293b]/30 p-4 sticky top-0 backdrop-blur-sm z-50">
+        <div class="max-w-[1600px] mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <h1 class="text-white font-bold text-lg tracking-tight">LEDGER_SYSTEM_v3.2</h1>
+                <span class="h-4 w-[1px] bg-slate-700"></span>
+                <div class="flex items-center text-xs space-x-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+                    <span class="text-slate-400 uppercase tracking-widest font-semibold">Node_01: Active</span>
+                </div>
+            </div>
+            <div class="flex space-x-6 text-xs font-mono">
+                <div class="text-right">
+                    <p class="text-slate-500">DB_ISOLATION_LEVEL</p>
+                    <p class="text-indigo-400 font-bold">SERIALIZABLE</p>
+                </div>
+                <div class="text-right border-l border-slate-800 pl-6">
+                    <p class="text-slate-500">PESSIMISTIC_LOCK_WAITS</p>
+                    <p class="text-emerald-400 font-bold">1.2ms avg</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-[1600px] mx-auto p-6">
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-[#1e293b] rounded-xl p-5 border border-slate-800 shadow-sm">
+                <p class="text-[10px] uppercase tracking-wider text-slate-500 mb-2">Omnibus Balance (External Bank)</p>
+                <div class="flex items-baseline space-x-2">
+                    <span class="text-2xl font-mono font-bold text-white">$150,000,000.00</span>
+                    <span class="text-[10px] text-slate-500">USD</span>
+                </div>
+            </div>
+            <div class="bg-[#1e293b] rounded-xl p-5 border border-slate-800 shadow-sm">
+                <p class="text-[10px] uppercase tracking-wider text-slate-500 mb-2">Internal Wallet Sum (Virtual)</p>
+                <div class="flex items-baseline space-x-2">
+                    <span class="text-2xl font-mono font-bold text-white">$149,998,240.50</span>
+                </div>
+            </div>
+            <div class="bg-[#1e293b] rounded-xl p-5 border border-slate-800 shadow-sm border-l-4 border-l-indigo-500">
+                <p class="text-[10px] uppercase tracking-wider text-slate-500 mb-2">In-Flight (Gateway Pending)</p>
+                <div class="flex items-baseline space-x-2">
+                    <span class="text-2xl font-mono font-bold text-indigo-400">$1,759.50</span>
+                </div>
+            </div>
+            <div class="bg-[#1e293b] rounded-xl p-5 border border-slate-800 shadow-sm">
+                <p class="text-[10px] uppercase tracking-wider text-slate-500 mb-2">Integrity Status</p>
+                <div class="flex items-center space-x-2">
+                    <span class="text-emerald-400 font-bold">MATCHED</span>
+                    <svg class="w-4 h-4 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <p class="text-[10px] text-slate-600 mt-1">Virtual Sum + In-Flight = Omnibus</p>
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-6">
+
+            <section class="lg:w-1/3 bg-[#1e293b] rounded-xl border border-slate-800 overflow-hidden shadow-xl">
+                <div class="p-4 border-b border-slate-800 flex justify-between items-center bg-slate-800/20">
+                    <h2 class="text-sm font-bold text-white uppercase tracking-tight">High-Contention Accounts</h2>
+                    <span class="text-[10px] bg-slate-700 px-2 py-1 rounded text-slate-400 font-mono">COUNT:
+                        8,241</span>
+                </div>
+                <div class="divide-y divide-slate-800 max-h-[600px] overflow-y-auto">
+                    <div class="p-4 bg-indigo-500/5 border-l-2 border-l-indigo-500">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-mono text-slate-400">UUID: 4f3a...d29e</span>
+                            <span
+                                class="text-[10px] text-indigo-400 font-bold uppercase tracking-tighter">Pool_Account</span>
+                        </div>
+                        <p class="text-sm text-white font-semibold mb-1">Corporate_Main_USD</p>
+                        <div class="flex justify-between items-end">
+                            <p class="text-lg font-mono font-bold text-white">$150,000,000.00</p>
+                            <span class="text-[9px] text-slate-500 italic">Locked 42ms ago</span>
+                        </div>
+                    </div>
+                    <div class="p-4 ledger-row transition-colors cursor-pointer">
+                        <div class="flex justify-between items-start mb-2 text-xs font-mono text-slate-500">
+                            <span>UUID: 7a21...e11b</span>
+                            <span class="text-[10px] uppercase">Vendor_Payout</span>
+                        </div>
+                        <p class="text-sm text-slate-300 font-medium mb-1">Amazon_Dist_Settle</p>
+                        <p class="text-lg font-mono font-bold text-slate-100">$2,410,500.22</p>
+                    </div>
+                    <div class="p-4 ledger-row transition-colors cursor-pointer">
+                        <div class="flex justify-between items-start mb-2 text-xs font-mono text-slate-500">
+                            <span>UUID: 1c92...f552</span>
+                            <span class="text-[10px] uppercase">Client_Wallet</span>
+                        </div>
+                        <p class="text-sm text-slate-300 font-medium mb-1">Driver_88214_Wallet</p>
+                        <p class="text-lg font-mono font-bold text-slate-100">$421.50</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="lg:w-2/3 bg-[#1e293b] rounded-xl border border-slate-800 overflow-hidden shadow-xl">
+                <div class="p-4 border-b border-slate-800 flex justify-between items-center bg-slate-800/20">
+                    <h2 class="text-sm font-bold text-white uppercase tracking-tight">System Transaction Log (Audit
+                        Stream)</h2>
+                    <div class="flex space-x-2">
+                        <div
+                            class="h-6 w-32 bg-slate-900 rounded border border-slate-700 text-[10px] flex items-center px-2 text-slate-500">
+                            Search Ref ID...</div>
+                        <button
+                            class="bg-indigo-600 px-3 py-1 rounded text-[10px] text-white font-bold hover:bg-indigo-500">RECONCILE
+                            ALL</button>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs text-left">
+                        <thead class="bg-slate-900/50 text-slate-500 border-b border-slate-800 font-mono">
+                            <tr>
+                                <th class="px-6 py-3 font-medium">TIMESTAMP (UTC)</th>
+                                <th class="px-6 py-3 font-medium">TX_ID</th>
+                                <th class="px-6 py-3 font-medium">ACCOUNT_REF</th>
+                                <th class="px-6 py-3 font-medium text-right">DELTA</th>
+                                <th class="px-6 py-3 font-medium">STATE</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800/50 font-mono">
+                            <tr class="ledger-row">
+                                <td class="px-6 py-4 text-slate-500">2026-03-15 01:11:02.124</td>
+                                <td class="px-6 py-4 text-indigo-400">e2e1_4421</td>
+                                <td class="px-6 py-4">Corporate_Main</td>
+                                <td class="px-6 py-4 text-right text-rose-400">-$20.00</td>
+                                <td class="px-6 py-4"><span
+                                        class="text-emerald-500 border border-emerald-500/30 bg-emerald-500/5 px-2 py-0.5 rounded text-[10px]">COMMITTED</span>
+                                </td>
+                            </tr>
+                            <tr class="ledger-row">
+                                <td class="px-6 py-4 text-slate-500">2026-03-15 01:11:02.126</td>
+                                <td class="px-6 py-4 text-indigo-400">e2e1_4422</td>
+                                <td class="px-6 py-4">Driver_88214</td>
+                                <td class="px-6 py-4 text-right text-emerald-400">+$15.00</td>
+                                <td class="px-6 py-4"><span
+                                        class="text-emerald-500 border border-emerald-500/30 bg-emerald-500/5 px-2 py-0.5 rounded text-[10px]">COMMITTED</span>
+                                </td>
+                            </tr>
+                            <tr class="ledger-row">
+                                <td class="px-6 py-4 text-slate-500">2026-03-15 01:11:02.128</td>
+                                <td class="px-6 py-4 text-indigo-400">e2e1_4423</td>
+                                <td class="px-6 py-4">Uber_Fee_Pool</td>
+                                <td class="px-6 py-4 text-right text-emerald-400">+$5.00</td>
+                                <td class="px-6 py-4"><span
+                                        class="text-emerald-500 border border-emerald-500/30 bg-emerald-500/5 px-2 py-0.5 rounded text-[10px]">COMMITTED</span>
+                                </td>
+                            </tr>
+                            <tr class="ledger-row bg-slate-800/10">
+                                <td class="px-6 py-4 text-slate-500">2026-03-15 01:11:05.990</td>
+                                <td class="px-6 py-4 text-amber-500">payout_001a</td>
+                                <td class="px-6 py-4">Driver_11022</td>
+                                <td class="px-6 py-4 text-right text-slate-200">-$500.00</td>
+                                <td class="px-6 py-4"><span
+                                        class="text-amber-500 border border-amber-500/30 bg-amber-500/5 px-2 py-0.5 rounded text-[10px] animate-pulse">SETTLING_EXTERNAL</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="p-4 bg-slate-900/50 text-[10px] text-slate-600 italic">
+                    All transactions are recorded with Transaction Isolation Level 4 (Serializable) to prevent Phantom
+                    Reads.
+                </div>
+            </section>
+        </div>
+    </main>
+
+</body>
+
+</html>

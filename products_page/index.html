@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Catalog Admin</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: Inter, sans-serif;
+        }
+
+        .surface {
+            background: white;
+        }
+
+        .shadow-soft {
+            box-shadow:
+                0 2px 4px rgba(0, 0, 0, 0.03),
+                0 8px 18px rgba(0, 0, 0, 0.05);
+        }
+
+        .shadow-hover {
+            transition: all .18s ease;
+        }
+
+        .shadow-hover:hover {
+            box-shadow:
+                0 4px 10px rgba(0, 0, 0, 0.05),
+                0 18px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        .tree-line {
+            border-left: 1px solid #e5e7eb;
+            margin-left: 10px;
+            padding-left: 14px;
+        }
+
+        .row-hover {
+            transition: background .15s ease, box-shadow .15s ease;
+        }
+
+        .row-hover:hover {
+            background: #f8fafc;
+            box-shadow: inset 0 0 0 1px #e5e7eb;
+        }
+
+        button {
+            transition: all .15s ease;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+        }
+
+        /* Slide from left */
+        .slide-left-enter {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+
+        .slide-left-enter-active {
+            transform: translateX(0);
+            opacity: 1;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        /* Slide from right */
+        .slide-right-enter {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+
+        .slide-right-enter-active {
+            transform: translateX(0);
+            opacity: 1;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+    </style>
+
+</head>
+
+<body class="bg-slate-100 text-slate-700">
+
+    <div class="flex min-h-screen">
+
+        <aside class="w-64 bg-white border-r border-slate-200 p-4 hidden md:block">
+
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-slate-600 mb-1">Search</label>
+                <div class="relative">
+                    <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="text" placeholder="Search products..." class="border border-slate-200 rounded-lg pl-9 pr-3 h-9 w-full
+                focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+                </div>
+            </div>
+
+            <div class="mb-4 px-2">
+                <label class="block text-sm font-medium text-slate-600 mb-6">Price Range</label>
+
+                <div class="relative h-1 w-full bg-slate-200 rounded-lg">
+                    <div class="absolute h-1 bg-blue-600 rounded-lg left-1/4 right-1/4"></div>
+
+                    <input type="range" min="0" max="2000" value="500"
+                        class="absolute pointer-events-none appearance-none w-full h-1 bg-transparent accent-blue-600 
+            [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 
+            [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-white">
+
+                    <input type="range" min="0" max="2000" value="1500"
+                        class="absolute pointer-events-none appearance-none w-full h-1 bg-transparent accent-blue-600 
+            [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 
+            [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-white">
+                </div>
+
+                <div class="flex justify-between mt-6">
+                    <div class="text-xs text-slate-500 bg-slate-100 px-2 py-1 rounded border border-slate-200">
+                        Min: <span class="font-bold text-slate-700">$500</span>
+                    </div>
+                    <div class="text-xs text-slate-500 bg-slate-100 px-2 py-1 rounded border border-slate-200">
+                        Max: <span class="font-bold text-slate-700">$1,500</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="py-4">
+                <hr class="border-t border-gray-300" />
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-slate-600 mb-3">Stock Status</label>
+                <ul class="space-y-3 text-sm">
+                    <li class="flex items-center justify-between group cursor-pointer">
+                        <label
+                            class="flex items-center gap-2 cursor-pointer w-full group-hover:text-blue-600 transition-colors">
+                            <input type="checkbox"
+                                class="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500 accent-blue-600">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-green-600"></i>
+                            <span class="text-slate-700 group-hover:text-blue-600">In Stock</span>
+                        </label>
+                        <span class="text-xs text-slate-400 font-mono">124</span>
+                    </li>
+
+                    <li class="flex items-center justify-between group cursor-pointer">
+                        <label
+                            class="flex items-center gap-2 cursor-pointer w-full group-hover:text-blue-600 transition-colors">
+                            <input type="checkbox"
+                                class="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500 accent-blue-600">
+                            <i data-lucide="alert-circle" class="w-4 h-4 text-yellow-600"></i>
+                            <span class="text-slate-700 group-hover:text-blue-600">Low Stock</span>
+                        </label>
+                        <span class="text-xs text-slate-400 font-mono">8</span>
+                    </li>
+
+                    <li class="flex items-center justify-between group cursor-pointer">
+                        <label
+                            class="flex items-center gap-2 cursor-pointer w-full group-hover:text-blue-600 transition-colors">
+                            <input type="checkbox"
+                                class="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500 accent-blue-600">
+                            <i data-lucide="x-circle" class="w-4 h-4 text-red-500"></i>
+                            <span class="text-slate-700 group-hover:text-blue-600">Out of Stock</span>
+                        </label>
+                        <span class="text-xs text-slate-400 font-mono">0</span>
+                    </li>
+                </ul>
+
+                <div class="mt-8 mb-8 px-2">
+
+                    <div class="relative w-full h-1 bg-slate-200 rounded-lg">
+                        <div id="slider-track" class="absolute h-1 bg-blue-600 rounded-lg"
+                            style="left: 20%; right: 30%;"></div>
+
+                        <input type="range" min="0" max="2000" value="500"
+                            class="absolute pointer-events-none appearance-none w-full h-1 bg-transparent accent-blue-600 
+            [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 
+            [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-white">
+
+                        <input type="range" min="0" max="2000" value="1500"
+                            class="absolute pointer-events-none appearance-none w-full h-1 bg-transparent accent-blue-600 
+            [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 
+            [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-white">
+                    </div>
+
+                    <div class="flex justify-between mt-6 text-xs font-bold text-slate-600">
+                        <span class="bg-slate-100 px-2 py-1 rounded border border-slate-200">$<span
+                                id="min-value">400</span></span>
+                        <span class="bg-slate-100 px-2 py-1 rounded border border-slate-200">$<span
+                                id="max-value">1400</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="py-4">
+                <hr class="border-t border-gray-300" />
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-slate-600 mb-2">Category</label>
+                <ul class="space-y-2 text-sm">
+                    <li class="flex items-center gap-2 cursor-pointer hover:text-blue-600">
+                        <input type="checkbox" checked>
+                        <i data-lucide="monitor" class="w-4 h-4 text-slate-400"></i> Electronics
+                    </li>
+                    <li class="ml-4 flex flex-col gap-1">
+                        <label class="flex items-center gap-2 cursor-pointer hover:text-blue-600">
+                            <input type="checkbox">
+                            <i data-lucide="cpu" class="w-4 h-4 text-slate-400"></i> Computers
+                        </label>
+                        <ul class="ml-5 space-y-1">
+                            <li class="flex items-center gap-2 cursor-pointer hover:text-blue-600">
+                                <input type="checkbox" checked>
+                                <i data-lucide="laptop" class="w-4 h-4 text-slate-400"></i> Laptops
+                            </li>
+                            <li class="flex items-center gap-2 cursor-pointer hover:text-blue-600">
+                                <input type="checkbox">
+                                <i data-lucide="desktop" class="w-4 h-4 text-slate-400"></i> Desktops
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="ml-4 flex items-center gap-2 cursor-pointer hover:text-blue-600">
+                        <input type="checkbox">
+                        <i data-lucide="tablet" class="w-4 h-4 text-slate-400"></i> Tablets
+                    </li>
+                    <li class="flex items-center gap-2 cursor-pointer hover:text-blue-600">
+                        <input type="checkbox">
+                        <i data-lucide="home" class="w-4 h-4 text-slate-400"></i> Home & Kitchen
+                    </li>
+                    <li class="flex items-center gap-2 cursor-pointer hover:text-blue-600">
+                        <input type="checkbox">
+                        <i data-lucide="shirt" class="w-4 h-4 text-slate-400"></i> Apparel
+                    </li>
+                    <li class="flex items-center gap-2 cursor-pointer hover:text-blue-600">
+                        <input type="checkbox">
+                        <i data-lucide="dumbbell" class="w-4 h-4 text-slate-400"></i> Sports & Outdoors
+                    </li>
+                </ul>
+            </div>
+
+            <div class="py-4">
+                <hr class="border-t border-gray-300" />
+            </div>
+
+            <button
+                class="relative w-full h-9 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-sm flex items-center justify-center px-4">
+                <i data-lucide="filter" class="w-4 h-4"></i>
+
+                <span class="font-medium">Apply</span>
+            </button>
+
+        </aside>
+
+        <div class="flex-1 flex flex-col">
+            <header class="bg-white border-b border-slate-200 px-6 py-3 flex items-center justify-between shadow-sm">
+                <h1 class="text-lg font-semibold flex items-center gap-2">
+                    <i data-lucide="layout-dashboard" class="w-5 h-5 text-slate-500"></i>
+                    Admin Dashboard
+                </h1>
+                <nav class="hidden md:flex gap-5 text-sm text-slate-500">
+                    <a class="hover:text-blue-600 flex items-center gap-1">
+                        <i data-lucide="home" class="w-4 h-4"></i>
+                        Dashboard
+                    </a>
+                    <a class="hover:text-blue-600 flex items-center gap-1">
+                        <i data-lucide="box" class="w-4 h-4"></i>
+                        Products
+                    </a>
+                    <a class="hover:text-blue-600 flex items-center gap-1">
+                        <i data-lucide="folder" class="w-4 h-4"></i>
+                        Categories
+                    </a>
+                    <a class="hover:text-blue-600 flex items-center gap-1">
+                        <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+                        Orders
+                    </a>
+                    <a class="hover:text-blue-600 flex items-center gap-1">
+                        <i data-lucide="bar-chart" class="w-4 h-4"></i>
+                        Reports
+                    </a>
+                </nav>
+            </header>
+            <main class="p-6 space-y-4">
+                <div class="text-sm text-slate-500 flex items-center gap-2">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    Home
+                    <span>></span>
+                    Electronics
+                    <span>></span>
+                    Computers
+                </div>
+                <div class="surface shadow-soft shadow-hover rounded-xl">
+                    <div class="p-4 border-b flex flex-wrap items-center gap-3">
+                        <div class="relative w-64">
+                            <i data-lucide="search"
+                                class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                            <input type="text" placeholder="Search products..."
+                                class="border border-slate-200 rounded-lg pl-9 pr-3 h-9 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead class="bg-slate-50 border-b text-slate-500 text-xs uppercase">
+                                <tr>
+                                    <th class="text-left px-5 py-3">SKU</th>
+
+                                    <th class="text-left px-5 py-3">Product</th>
+
+                                    <th class="text-left px-5 py-3">Price</th>
+
+                                    <th class="text-left px-5 py-3">Stock</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y">
+                                <tr class="row-hover">
+                                    <td class="px-5 py-3 font-medium">LAP-12345</td>
+                                    <td class="px-5 py-3">Dell XPS 13</td>
+                                    <td class="px-5 py-3">$999</td>
+                                    <td class="px-5 py-3">
+                                        <span class="text-green-600 font-medium">● In Stock</span>
+                                    </td>
+                                </tr>
+                                <tr class="row-hover">
+                                    <td class="px-5 py-3 font-medium">LAP-67890</td>
+                                    <td class="px-5 py-3">MacBook Pro 16"</td>
+                                    <td class="px-5 py-3">$2399</td>
+                                    <td class="px-5 py-3">
+                                        <span class="text-green-600 font-medium">● In Stock</span>
+                                    </td>
+                                </tr>
+                                <tr class="row-hover">
+                                    <td class="px-5 py-3 font-medium">LAP-45678</td>
+                                    <td class="px-5 py-3">HP Spectre x360</td>
+                                    <td class="px-5 py-3">$1299</td>
+                                    <td class="px-5 py-3">
+                                        <span class="text-yellow-600 font-medium">● Low Stock</span>
+                                    </td>
+                                </tr>
+                                <tr class="row-hover">
+                                    <td class="px-5 py-3 font-medium">LAP-11223</td>
+                                    <td class="px-5 py-3">Lenovo ThinkPad X1</td>
+                                    <td class="px-5 py-3">$1499</td>
+                                    <td class="px-5 py-3">
+                                        <span class="text-red-500 font-medium">● Low Stock</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 border-t text-sm">
+
+                        <div class="text-slate-500">
+                            Showing 1–8 of 100
+                        </div>
+                        <div class="flex gap-1">
+                            <button class="px-3 py-1 border rounded hover:bg-slate-100 flex items-center gap-1">
+
+                                <i data-lucide="chevron-left" class="w-4 h-4"></i>
+
+                                Prev
+
+                            </button>
+
+
+                            <button class="px-3 py-1 bg-blue-600 text-white rounded">
+                                1
+                            </button>
+
+
+                            <button class="px-3 py-1 border rounded hover:bg-slate-100">
+                                2
+                            </button>
+
+
+                            <button class="px-3 py-1 border rounded hover:bg-slate-100">
+                                3
+                            </button>
+
+
+                            <button class="px-3 py-1 border rounded hover:bg-slate-100 flex items-center gap-1">
+
+                                Next
+
+                                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </main>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        // Toggle a dropdown node (for expanding subcategories)
+        function toggleNode(event, id) {
+            event.stopPropagation(); // Prevent closing dropdown
+            const el = document.getElementById(id);
+            el.classList.toggle('hidden');
+        }
+
+        // Toggle main dropdown visibility
+        function toggleDropdown(id) {
+            const el = document.getElementById(id);
+            el.classList.toggle('hidden');
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function (event) {
+            const priceDropdown = document.getElementById('priceDropdown');
+            const stockDropdown = document.getElementById('stockDropdown');
+            const categoryDropdown = document.getElementById('categoryDropdown');
+
+            // Price
+            if (!event.target.closest('#priceDropdown') &&
+                !event.target.closest('button[onclick="toggleDropdown(\'priceDropdown\')"]')) {
+                priceDropdown.classList.add('hidden');
+            }
+
+            // Stock
+            if (!event.target.closest('#stockDropdown') &&
+                !event.target.closest('button[onclick="toggleDropdown(\'stockDropdown\')"]')) {
+                stockDropdown.classList.add('hidden');
+            }
+
+            // Category
+            if (!event.target.closest('#categoryDropdown') &&
+                !event.target.closest('button[onclick="toggleDropdown(\'categoryDropdown\')"]')) {
+                categoryDropdown.classList.add('hidden');
+            }
+        });
+
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+
+</body>
+
+</html>
