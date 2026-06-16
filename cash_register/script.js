@@ -57,7 +57,7 @@ const state = {
 };
 
 // ===== DOM Elements =====
-let elements = {};
+const elements = {};
 
 // ===== Utility Functions =====
 const utils = {
@@ -887,6 +887,8 @@ const eventListeners = {
         
         switch (result.status) {
             case 'SUCCESS':
+                // Clear cart and re-render products
+                products.clearCart();
                 ui.updateDrawerDisplay();
                 ui.updateCartDisplay();
                 ui.renderProducts();
@@ -911,48 +913,32 @@ const eventListeners = {
 // ===== Initialize Application =====
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize DOM elements
-    elements = {
-        // Products
-        productsGrid: document.getElementById('products-grid'),
-        totalAmount: document.getElementById('total-amount'),
-        
-        // Register
-        itemDisplay: document.getElementById('item-display'),
-        priceDisplay: document.getElementById('price-display'),
-        cashInput: document.getElementById('cash-input'),
-        purchaseBtn: document.getElementById('purchase-btn'),
-        
-        // Drawer
-        drawerContents: document.getElementById('drawer-contents'),
-        drawerTotal: document.getElementById('drawer-total'),
-        drawerToggle: document.getElementById('drawer-toggle'),
-        drawerDisplay: document.getElementById('drawer-display'),
-        
-        // Transactions
-        transactionsList: document.getElementById('transactions-list'),
-        clearHistoryBtn: document.getElementById('clear-history-btn'),
-        
-        // Modals
-        changeModal: document.getElementById('change-modal'),
-        changeResults: document.getElementById('change-results'),
-        modalClose: document.getElementById('modal-close'),
-        closeModalBtn: document.getElementById('close-modal-btn'),
-        printReceiptBtn: document.getElementById('print-receipt-btn'),
-        
-        receiptModal: document.getElementById('receipt-modal'),
-        receiptPreview: document.getElementById('receipt-preview'),
-        receiptModalClose: document.getElementById('receipt-modal-close'),
-        closeReceiptModal: document.getElementById('close-receipt-modal'),
-        printReceiptFinal: document.getElementById('print-receipt-final'),
-        
-        // Notifications
-        notification: document.getElementById('notification'),
-        notificationMessage: document.getElementById('notification-message'),
-        
-        // Controls
-        themeToggle: document.getElementById('theme-toggle'),
-        resetBtn: document.getElementById('reset-btn')
-    };
+    elements.productsGrid = document.getElementById('products-grid');
+    elements.totalAmount = document.getElementById('total-amount');
+    elements.itemDisplay = document.getElementById('item-display');
+    elements.priceDisplay = document.getElementById('price-display');
+    elements.cashInput = document.getElementById('cash-input');
+    elements.purchaseBtn = document.getElementById('purchase-btn');
+    elements.drawerContents = document.getElementById('drawer-contents');
+    elements.drawerTotal = document.getElementById('drawer-total');
+    elements.drawerToggle = document.getElementById('drawer-toggle');
+    elements.drawerDisplay = document.getElementById('drawer-display');
+    elements.transactionsList = document.getElementById('transactions-list');
+    elements.clearHistoryBtn = document.getElementById('clear-history-btn');
+    elements.changeModal = document.getElementById('change-modal');
+    elements.changeResults = document.getElementById('change-results');
+    elements.modalClose = document.getElementById('modal-close');
+    elements.closeModalBtn = document.getElementById('close-modal-btn');
+    elements.printReceiptBtn = document.getElementById('print-receipt-btn');
+    elements.receiptModal = document.getElementById('receipt-modal');
+    elements.receiptPreview = document.getElementById('receipt-preview');
+    elements.receiptModalClose = document.getElementById('receipt-modal-close');
+    elements.closeReceiptModal = document.getElementById('close-receipt-modal');
+    elements.printReceiptFinal = document.getElementById('print-receipt-final');
+    elements.notification = document.getElementById('notification');
+    elements.notificationMessage = document.getElementById('notification-message');
+    elements.themeToggle = document.getElementById('theme-toggle');
+    elements.resetBtn = document.getElementById('reset-btn');
     
     // Verify elements are loaded
     if (!elements.productsGrid) {
