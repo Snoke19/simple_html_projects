@@ -22,7 +22,7 @@ const rollDice = () => {
     for (let i = 0; i < 5; i++) {
         const randomDice = Math.floor(Math.random() * 6) + 1;
         diceValuesArr.push(randomDice);
-    };
+    }
 
     listOfAllDice.forEach((dice, index) => {
         dice.textContent = diceValuesArr[index];
@@ -142,8 +142,7 @@ const checkForStraights = (arr) => {
     if (difference === 4) {
         updateRadioOption(3, 30);
         updateRadioOption(4, 40);
-    }
-    else {
+    } else {
         updateRadioOption(5, 0);
     }
 

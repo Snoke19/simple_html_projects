@@ -73,8 +73,7 @@ searchButton.addEventListener("click", (event) => {
     const valueSearch = searchInput.value;
     fetchPokemon(valueSearch)
         .then((result) => {
-            const pokemonObj = result;
-            updatePokemonInfo(pokemonObj);
+            updatePokemonInfo(result);
         })
         .catch((error) => {
             alert(error.message);

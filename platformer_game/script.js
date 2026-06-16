@@ -26,6 +26,7 @@ class Player {
         this.width = proportionalSize(40);
         this.height = proportionalSize(40);
     }
+
     draw() {
         ctx.fillStyle = "#99c9ff";
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
@@ -65,6 +66,7 @@ class Platform {
         this.width = 200;
         this.height = proportionalSize(40);
     }
+
     draw() {
         ctx.fillStyle = "#acd157";
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
@@ -86,29 +88,30 @@ class CheckPoint {
         ctx.fillStyle = "#f1be32";
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
     }
+
     claim() {
         this.width = 0;
         this.height = 0;
         this.position.y = Infinity;
         this.claimed = true;
     }
-};
+}
 
 const player = new Player();
 
 const platformPositions = [
-    { x: 500, y: proportionalSize(450) },
-    { x: 700, y: proportionalSize(400) },
-    { x: 850, y: proportionalSize(350) },
-    { x: 900, y: proportionalSize(350) },
-    { x: 1050, y: proportionalSize(150) },
-    { x: 2500, y: proportionalSize(450) },
-    { x: 2900, y: proportionalSize(400) },
-    { x: 3150, y: proportionalSize(350) },
-    { x: 3900, y: proportionalSize(450) },
-    { x: 4200, y: proportionalSize(400) },
-    { x: 4400, y: proportionalSize(200) },
-    { x: 4700, y: proportionalSize(150) },
+    {x: 500, y: proportionalSize(450)},
+    {x: 700, y: proportionalSize(400)},
+    {x: 850, y: proportionalSize(350)},
+    {x: 900, y: proportionalSize(350)},
+    {x: 1050, y: proportionalSize(150)},
+    {x: 2500, y: proportionalSize(450)},
+    {x: 2900, y: proportionalSize(400)},
+    {x: 3150, y: proportionalSize(350)},
+    {x: 3900, y: proportionalSize(450)},
+    {x: 4200, y: proportionalSize(400)},
+    {x: 4400, y: proportionalSize(200)},
+    {x: 4700, y: proportionalSize(150)},
 ];
 
 const platforms = platformPositions.map(
@@ -116,9 +119,9 @@ const platforms = platformPositions.map(
 );
 
 const checkpointPositions = [
-    { x: 1170, y: proportionalSize(80), z: 1 },
-    { x: 2900, y: proportionalSize(330), z: 2 },
-    { x: 4800, y: proportionalSize(80), z: 3 },
+    {x: 1170, y: proportionalSize(80), z: 1},
+    {x: 2900, y: proportionalSize(330), z: 2},
+    {x: 4800, y: proportionalSize(80), z: 3},
 ];
 
 const checkpoints = checkpointPositions.map(
@@ -191,7 +194,7 @@ const animate = () => {
         if (platformDetectionRules.every(rule => rule)) {
             player.position.y = platform.position.y + player.height;
             player.velocity.y = gravity;
-        };
+        }
     });
 
     checkpoints.forEach((checkpoint, index, checkpoints) => {
@@ -219,7 +222,7 @@ const animate = () => {
             }
 
 
-        };
+        }
     });
 }
 
@@ -278,10 +281,10 @@ const showCheckpointScreen = (msg) => {
 
 startBtn.addEventListener("click", startGame);
 
-window.addEventListener("keydown", ({ key }) => {
+window.addEventListener("keydown", ({key}) => {
     movePlayer(key, 8, true);
 });
 
-window.addEventListener("keyup", ({ key }) => {
+window.addEventListener("keyup", ({key}) => {
     movePlayer(key, 0, false);
 });

@@ -85,8 +85,7 @@ City skyline visualization project.
 
 Interactive coffee menu for a cafe.
 
-**Screenshot:**
-(Add screenshot here)
+![Coffee Menu](screenshots/coffee-menu.png)
 
 ---
 
@@ -94,8 +93,7 @@ Interactive coffee menu for a cafe.
 
 Color markers and drawing tools project.
 
-**Screenshot:**
-(Add screenshot here)
+![Color Markers](screenshots/color_markers.png)
 
 ---
 
@@ -103,17 +101,13 @@ Color markers and drawing tools project.
 
 Demonstration of CSS box model concepts.
 
-**Screenshot:**
-(Add screenshot here)
-
 ---
 
 ### Decimal to Binary Converter
 
 Tool to convert decimal numbers to binary.
 
-**Screenshot:**
-(Add screenshot here)
+![Decimal to Binary Converter](screenshots/decimal_to_binary_converter.png)
 
 ---
 
@@ -121,8 +115,7 @@ Tool to convert decimal numbers to binary.
 
 Simple dice rolling game.
 
-**Screenshot:**
-(Add screenshot here)
+![Dice Game](screenshots/dice_game.png)
 
 ---
 
@@ -130,8 +123,7 @@ Simple dice rolling game.
 
 Ferris wheel animation or visualization.
 
-**Screenshot:**
-(Add screenshot here)
+![Ferris Wheel](screenshots/ferris_wheel.gif)
 
 ---
 
@@ -139,8 +131,7 @@ Ferris wheel animation or visualization.
 
 Project using fetch API and promises to display authors.
 
-**Screenshot:**
-(Add screenshot here)
+![Fetch Promises Building Authors Page](screenshots/fetch_promises_building_authors_page.png)
 
 ---
 
@@ -148,8 +139,7 @@ Project using fetch API and promises to display authors.
 
 Basic gallery starter project.
 
-**Screenshot:**
-(Add screenshot here)
+![Gallery Start](screenshots/gallery-start.gif)
 
 ---
 
@@ -157,8 +147,7 @@ Basic gallery starter project.
 
 Digital magazine layout project.
 
-**Screenshot:**
-(Add screenshot here)
+![Magazine](screenshots/magazine.png)
 
 ---
 
@@ -166,8 +155,7 @@ Digital magazine layout project.
 
 Validates various number formats.
 
-**Screenshot:**
-(Add screenshot here)
+![Number Validator](screenshots/number_validator.png)
 
 ---
 
@@ -175,8 +163,7 @@ Validates various number formats.
 
 Nutrition facts label display.
 
-**Screenshot:**
-(Add screenshot here)
+![Nutrition Label](screenshots/nutrition_label.png)
 
 ---
 
@@ -184,8 +171,7 @@ Nutrition facts label display.
 
 Virtual piano with playable keys.
 
-**Screenshot:**
-(Add screenshot here)
+![Piano](screenshots/piano.png)
 
 ---
 
@@ -193,8 +179,7 @@ Virtual piano with playable keys.
 
 2D platformer game built with JavaScript.
 
-**Screenshot:**
-(Add screenshot here)
+![Platformer Game](screenshots/platformer_game.gif)
 
 ---
 
@@ -202,8 +187,7 @@ Virtual piano with playable keys.
 
 Pokemon-themed application or game.
 
-**Screenshot:**
-(Add screenshot here)
+![Pokemon Project](screenshots/pokemon_project.png)
 
 ---
 
@@ -211,17 +195,13 @@ Pokemon-themed application or game.
 
 E-commerce products display page.
 
-**Screenshot:**
-(Add screenshot here)
-
 ---
 
 ### Product Landing Page
 
 Landing page for a product.
 
-**Screenshot:**
-(Add screenshot here)
+![Products Page](screenshots/product_landing_page.png)
 
 ---
 
@@ -229,17 +209,7 @@ Landing page for a product.
 
 User registration form with validation.
 
-**Screenshot:**
-(Add screenshot here)
-
----
-
-### Responsive Website
-
-Website that adapts to different screen sizes.
-
-**Screenshot:**
-(Add screenshot here)
+![Registration Form](screenshots/registration-form.png)
 
 ---
 
@@ -247,8 +217,7 @@ Website that adapts to different screen sizes.
 
 Converts numbers to Roman numerals.
 
-**Screenshot:**
-(Add screenshot here)
+![Registration Form](screenshots/roman_numeral_converter.png)
 
 ---
 
