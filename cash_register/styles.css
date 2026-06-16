@@ -173,7 +173,7 @@ body {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-sm);
-    max-height: 400px;
+    max-height: 610px;
     overflow-y: auto;
     padding-right: var(--spacing-xs);
     padding-top: 5px;

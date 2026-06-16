@@ -1,4 +1,3 @@
-// ===== Configuration =====
 const storage = {
     DENOMINATIONS: [
         {name: 'ONE HUNDRED', value: 10000, symbol: '$100'},
