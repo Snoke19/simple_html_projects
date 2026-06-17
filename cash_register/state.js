@@ -1,4 +1,3 @@
-// ===== State Management =====
 import storage from "./storage.js";
 
 const state = {

@@ -2,115 +2,93 @@ import utils from "./utils.js";
 import state from "./state.js";
 import storage from "./storage.js";
 
+const getSortedDenominations = () => [...storage.DENOMINATIONS].sort((a, b) => b.value - a.value);
+
+const findCidEntry = (currency) => {
+    const index = state.cid.findIndex(c => c[0] === currency);
+    return index !== -1 ? {index, entry: state.cid[index]} : null;
+}
+
+const findDenominationIndex = (denomName) => utils.findDenominationIndex(denomName);
+
+const calculateUse = (availableAmount, denomValue, remainingChange) => {
+    const maxUse = Math.floor(availableAmount / denomValue);
+    const needed = Math.floor(remainingChange / denomValue);
+    return Math.min(maxUse, needed);
+};
+
+const processChange = (changeDueCents, mutatesDrawer = false) => {
+    const drawer = mutatesDrawer ? state.cid : utils.deepClone(state.cid);
+    let remaining = changeDueCents;
+    const breakdown = [];
+
+    for (const denom of getSortedDenominations()) {
+        if (remaining <= 0) break;
+
+        const cidIndex = findDenominationIndex(denom.name);
+        if (cidIndex === -1) continue;
+
+        const [currency, available] = drawer[cidIndex];
+        const {value} = denom;
+
+        if (available <= 0 || remaining < value) continue;
+
+        const use = calculateUse(available, value, remaining);
+        const amountUsed = use * value;
+        remaining -= amountUsed;
+
+        if (mutatesDrawer) {
+            drawer[cidIndex][1] -= amountUsed;
+        }
+
+        if (amountUsed > 0) {
+            breakdown.push([currency, utils.toDollars(amountUsed)]);
+        }
+    }
+
+    return {breakdown, remaining};
+};
+
 const cashDrawer = {
-    // Get total amount in drawer (in cents)
-    getTotal: () => {
-        return state.cid.reduce((sum, [, amount]) => sum + amount, 0);
-    },
+    getTotal: () => state.cid.reduce((sum, [, amount]) => sum + amount, 0),
 
-    // Get drawer data for display
-    getDisplayData: () => {
-        return state.cid.map(([currency, amount]) => ({
-            currency,
-            amount: utils.toDollars(amount),
-            displayAmount: utils.formatDisplay(utils.toDollars(amount))
-        }));
-    },
+    getDisplayData: () =>
+        state.cid.map(([currency, amount]) => {
+            const dollars = utils.toDollars(amount);
+            return {
+                currency,
+                amount: dollars,
+                displayAmount: utils.formatDisplay(dollars)
+            };
+        }),
 
-    // Check if drawer can provide change
-    canProvideChange: (changeDueCents) => {
-        const tempCid = utils.deepClone(state.cid);
-        let remainingChange = changeDueCents;
+    canProvideChange: (changeDueCents) => processChange(changeDueCents).remaining === 0,
 
-        // Sort by highest denomination first
-        const sortedDenominations = [...storage.DENOMINATIONS].sort((a, b) => b.value - a.value);
-
-        for (const denom of sortedDenominations) {
-            const cidIndex = utils.findDenominationIndex(denom.name);
-            if (cidIndex === -1) continue;
-
-            const [currency, availableAmount] = tempCid[cidIndex];
-            const denomValue = denom.value;
-
-            if (remainingChange <= 0) break;
-
-            if (availableAmount > 0 && remainingChange >= denomValue) {
-                const maxUse = Math.floor(availableAmount / denomValue);
-                const needed = Math.floor(remainingChange / denomValue);
-                const use = Math.min(maxUse, needed);
-
-                remainingChange -= use * denomValue;
-            }
-        }
-
-        return remainingChange === 0;
-    },
-
-    // Calculate change using largest denominations first
     calculateChange: (changeDueCents) => {
-        const tempCid = utils.deepClone(state.cid);
-        let remainingChange = changeDueCents;
-        const changeBreakdown = [];
-
-        // Sort by highest denomination first
-        const sortedDenominations = [...storage.DENOMINATIONS].sort((a, b) => b.value - a.value);
-
-        for (const denom of sortedDenominations) {
-            const cidIndex = utils.findDenominationIndex(denom.name);
-            if (cidIndex === -1) continue;
-
-            const [currency, availableAmount] = tempCid[cidIndex];
-            const denomValue = denom.value;
-
-            if (remainingChange <= 0) break;
-
-            if (availableAmount > 0 && remainingChange >= denomValue) {
-                const maxUse = Math.floor(availableAmount / denomValue);
-                const needed = Math.floor(remainingChange / denomValue);
-                const use = Math.min(maxUse, needed);
-
-                const amountUsed = use * denomValue;
-                remainingChange -= amountUsed;
-
-                // Update temp CID
-                tempCid[cidIndex][1] -= amountUsed;
-
-                if (amountUsed > 0) {
-                    changeBreakdown.push([currency, utils.toDollars(amountUsed)]);
-                }
-            }
-        }
-
+        const {breakdown, remaining} = processChange(changeDueCents);
         return {
-            change: changeBreakdown,
-            remaining: remainingChange,
-            isExact: remainingChange === 0
+            change: breakdown,
+            remaining,
+            isExact: remaining === 0
         };
     },
 
-    // Update CID after transaction
     updateAfterTransaction: (changeBreakdown) => {
         for (const [currency, amountDollars] of changeBreakdown) {
-            const amountCents = utils.toCents(amountDollars);
-            const cidIndex = state.cid.findIndex(c => c[0] === currency);
-
-            if (cidIndex !== -1) {
-                state.cid[cidIndex][1] -= amountCents;
+            const match = findCidEntry(currency);
+            if (match) {
+                match.entry[1] -= utils.toCents(amountDollars);
             }
         }
     },
 
-    // Add to CID (for adding cash to drawer)
     addToDrawer: (currency, amountDollars) => {
-        const amountCents = utils.toCents(amountDollars);
-        const cidIndex = state.cid.findIndex(c => c[0] === currency);
-
-        if (cidIndex !== -1) {
-            state.cid[cidIndex][1] += amountCents;
+        const match = findCidEntry(currency);
+        if (match) {
+            match.entry[1] += utils.toCents(amountDollars);
         }
     },
 
-    // Reset to default
     reset: () => {
         state.cid = utils.deepClone(storage.DEFAULT_CID);
     }

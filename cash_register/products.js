@@ -1,9 +1,14 @@
-// ===== Product Functions =====
 import storage from "./storage.js";
 import state from "./state.js";
 
+const findProduct = (id) => storage.PRODUCTS.find(p => p.id === Number(id));
+
+const updateSelection = () => {
+    state.selectedProduct = state.cart.at(-1) ?? null;
+};
+
 const products = {
-    getById: (id) => storage.PRODUCTS.find(p => p.id === Number(id)),
+    getById: findProduct,
 
     addToCart: (product) => {
         state.cart.push(product);
@@ -11,9 +16,11 @@ const products = {
     },
 
     removeFromCart: (productId) => {
+        const initialLength = state.cart.length;
         state.cart = state.cart.filter(p => p.id !== productId);
-        if (state.selectedProduct?.id === productId) {
-            state.selectedProduct = state.cart[state.cart.length - 1] || null;
+
+        if (state.cart.length < initialLength) {
+            updateSelection();
         }
     },
 
@@ -22,9 +29,7 @@ const products = {
         state.selectedProduct = null;
     },
 
-    getCartTotal: () => {
-        return state.cart.reduce((sum, product) => sum + product.price, 0);
-    }
+    getCartTotal: () => state.cart.reduce((sum, {price}) => sum + price, 0)
 };
 
 export default products;

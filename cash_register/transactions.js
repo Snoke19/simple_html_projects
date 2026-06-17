@@ -18,7 +18,7 @@ const transactions = {
         state.transactionCounter = 1;
     },
 
-    getAll: () => state.transactions
+    getAll: () => [...state.transactions]
 };
 
 export default transactions;
