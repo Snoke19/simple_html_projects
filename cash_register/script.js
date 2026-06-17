@@ -4,7 +4,7 @@ import state from "./state.js";
 import products from "./products.js";
 import transactions from "./transactions.js";
 import cashDrawer from "./cashDrawer.js";
-import businessLogic from "./businessLogic.js";
+import processPurchase from "./businessLogic.js";
 
 // ===== DOM Elements =====
 const elements = {};
@@ -626,7 +626,7 @@ const eventListeners = {
             return;
         }
 
-        const result = businessLogic.processPurchase(cashReceived);
+        const result = processPurchase(cashReceived);
 
         switch (result.status) {
             case 'SUCCESS':
@@ -704,5 +704,5 @@ window.cashRegister = {
     products,
     transactions,
     ui,
-    businessLogic
+    processPurchase
 };
