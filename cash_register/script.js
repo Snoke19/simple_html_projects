@@ -156,6 +156,11 @@ const ui = {
         elements.drawerTotal.textContent = utils.formatDisplay(drawerTotal);
     },
 
+    updateRevenueDisplay: () => {
+        const total = state.transactions.reduce((sum, t) => sum + t.amount, 0);
+        elements.revenueValue.textContent = `$${total.toFixed(2)}`;
+    },
+
     // Update transactions display
     updateTransactionsDisplay: () => {
         const allTransactions = transactions.getAll();
@@ -206,6 +211,8 @@ const ui = {
                 </div>
             `;
         }).join('');
+
+        ui.updateRevenueDisplay();
     },
 
     // Show notification
@@ -557,6 +564,7 @@ const eventListeners = {
                 if (confirm('Are you sure you want to clear all transaction history?')) {
                     transactions.clear();
                     ui.updateTransactionsDisplay();
+                    ui.updateRevenueDisplay();
                     ui.showNotification('Transaction history cleared');
                 }
             } else {
@@ -686,6 +694,7 @@ document.addEventListener('DOMContentLoaded', () => {
     elements.notificationMessage = document.getElementById('notification-message');
     elements.themeToggle = document.getElementById('theme-toggle');
     elements.resetBtn = document.getElementById('reset-btn');
+    elements.revenueValue = document.getElementById('revenue-value');
 
     // Verify elements are loaded
     if (!elements.productsGrid) {
