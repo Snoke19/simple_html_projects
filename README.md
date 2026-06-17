@@ -9,6 +9,14 @@ only vanilla JS/HTML/CSS.
 
 ## Projects
 
+### Cash Register
+
+Cash register simulator for handling transactions.
+
+![Cash Register](screenshots/cash_register.gif)
+
+---
+
 ### Product page
 
 Simple product page with stock
@@ -62,14 +70,6 @@ Penguin-themed project.
 Spreadsheet application built with HTML/CSS/JS.
 
 ![Building Penguin](screenshots/building_spreadsheet.png)
-
----
-
-### Cash Register
-
-Cash register simulator for handling transactions.
-
-![Cash Register](screenshots/cash_register.png)
 
 ---
 
