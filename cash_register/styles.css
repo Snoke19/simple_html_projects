@@ -897,9 +897,9 @@ body {
     display: flex;
 }
 
-/* Change Hint */
+/* Change Hint - Dynamic Show/Hide */
 .change-hint {
-    display: flex;
+    display: none; /* Hidden by default, shown via JS */
     justify-content: space-between;
     align-items: center;
     padding: var(--sp-md) var(--sp-lg);
@@ -907,13 +907,13 @@ body {
     border: 1px solid rgba(16, 185, 129, 0.2);
     border-radius: var(--r-md);
     opacity: 0;
-    transform: translateY(-8px);
-    transition: all var(--t-base);
+    transform: translateY(-8px) scale(0.97);
+    transition: opacity var(--t-base), transform var(--t-base);
 }
 
 .change-hint.visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
 }
 
 .change-hint-label {

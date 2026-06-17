@@ -138,10 +138,14 @@ const ui = {
         const hintValue = document.getElementById('change-hint-value');
 
         if (change > 0 && state.cart.length > 0) {
+            hint.style.display = 'flex';
             hint.classList.add('visible');
             hintValue.textContent = utils.formatDisplay(change);
         } else {
             hint.classList.remove('visible');
+            if (!hint.classList.contains('visible')) {
+                hint.style.display = 'none';
+            }
         }
     },
 
