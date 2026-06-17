@@ -116,11 +116,6 @@ const ui = {
 
         // Update meta
         document.getElementById('meta-items').textContent = totalItems;
-        document.getElementById('meta-tax').textContent = '$0.00';
-
-        // Update cart summary
-        document.getElementById('cart-summary').textContent = `${totalItems} item${totalItems !== 1 ? 's' : ''}`;
-        document.getElementById('cart-total-display').textContent = utils.formatDisplay(cartTotal);
 
         // Update change hint
         ui.updateChangeHint();
