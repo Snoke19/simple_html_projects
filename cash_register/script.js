@@ -19,7 +19,6 @@ const ui = {
         ui.updateTransactionsDisplay();
         ui.loadTheme();
         ui.startClock();
-        ui.updateSalesCounter();
     },
 
     // Start live clock
@@ -33,12 +32,6 @@ const ui = {
         };
         updateTime();
         setInterval(updateTime, 1000);
-    },
-
-    // Update sales counter
-    updateSalesCounter: () => {
-        const successCount = state.transactions.filter(t => t.status === 'SUCCESS').length;
-        document.getElementById('sales-count').textContent = `${successCount} sale${successCount !== 1 ? 's' : ''} today`;
     },
 
     // Render product cards
@@ -395,6 +388,20 @@ const eventListeners = {
             if (e.key === 'Enter') {
                 eventListeners.handlePurchase();
             }
+
+            const allowedKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
+            if (allowedKeys.includes(e.key)) return;
+
+            if (e.key === '.') {
+                if (e.target.value.includes('.')) {
+                    e.preventDefault(); // Blocks typing a second dot
+                }
+                return;
+            }
+
+            if (!/^[0-9]$/.test(e.key)) {
+                e.preventDefault();
+            }
         });
 
         // Clear cash button
@@ -550,7 +557,6 @@ const eventListeners = {
                 if (confirm('Are you sure you want to clear all transaction history?')) {
                     transactions.clear();
                     ui.updateTransactionsDisplay();
-                    ui.updateSalesCounter();
                     ui.showNotification('Transaction history cleared');
                 }
             } else {
@@ -630,7 +636,6 @@ const eventListeners = {
                 ui.updateCartDisplay();
                 ui.renderProducts();
                 ui.updateTransactionsDisplay();
-                ui.updateSalesCounter();
                 ui.updateChangeHint();
                 ui.showChangeModal(result, result.transaction);
                 ui.showNotification('Transaction completed!');
