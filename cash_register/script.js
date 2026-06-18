@@ -5,6 +5,7 @@ import products from "./products.js";
 import transactions from "./transactions.js";
 import cashDrawer from "./cashDrawer.js";
 import processPurchase from "./businessLogic.js";
+import {STATUS} from "./errors/messages.js";
 
 // ===== DOM Elements =====
 const elements = {};
@@ -157,7 +158,7 @@ const ui = {
     },
 
     updateRevenueDisplay: () => {
-        const total = state.transactions.reduce((sum, t) => sum + t.amount, 0);
+        const total = state.transactions.filter(trn => trn.status === STATUS.SUCCESS).reduce((sum, t) => sum + t.amount, 0);
         elements.revenueValue.textContent = `$${total.toFixed(2)}`;
     },
 
@@ -167,7 +168,11 @@ const ui = {
         const filter = state.transactionFilter || 'all';
         const filtered = filter === 'all'
             ? allTransactions
-            : allTransactions.filter(t => t.status === (filter === 'success' ? 'SUCCESS' : 'INSUFFICIENT_FUNDS'));
+            : allTransactions.filter(t =>
+                filter === 'success'
+                    ? t.status === 'SUCCESS'
+                    : t.status !== 'SUCCESS'
+            );
 
         if (filtered.length === 0) {
             elements.transactionsList.innerHTML = `
@@ -267,6 +272,8 @@ const ui = {
         state.currentTransaction = transaction;
 
         elements.changeModal.classList.add('active');
+
+        ui.updateTransactionsDisplay();
     },
 
     // Show receipt modal

@@ -15,39 +15,55 @@ import {
 } from "./errors/messages.js";
 
 function processPurchase(cashReceivedDollars) {
-    if (state.cart.length === 0) return noItemsInCartError;
-    if (!cashReceivedDollars || cashReceivedDollars <= 0) return notValidCashAmountError;
+    let transaction;
+
+    if (state.cart.length === 0) {
+        const error = noItemsInCartError;
+        addTransaction(error.status, cashReceivedDollars);
+        return error;
+    }
+    if (!cashReceivedDollars || cashReceivedDollars <= 0) {
+        const error = notValidCashAmountError;
+        addTransaction(error.status, cashReceivedDollars);
+        return error;
+    }
 
     const cartTotalCents = products.getCartTotal();
     const cashReceivedCents = utils.toCents(cashReceivedDollars);
 
-    if (cashReceivedCents < cartTotalCents) return insufficientPayment(cartTotalCents - cashReceivedCents);
+    if (cashReceivedCents < cartTotalCents) {
+        const error = insufficientPayment(cartTotalCents - cashReceivedCents);
+        addTransaction(error.status, cartTotalCents, cashReceivedDollars);
+        return error;
+    }
 
     const changeDueCents = cashReceivedCents - cartTotalCents;
 
-    if (cashDrawer.getTotal() < changeDueCents) return insufficientDrawerFunds;
-    if (!cashDrawer.canProvideChange(changeDueCents)) return cannotProvideExactChange;
+    if (cashDrawer.getTotal() < changeDueCents) {
+        const error = insufficientDrawerFunds;
+        addTransaction(error.status, cartTotalCents, cashReceivedDollars);
+        return error;
+    }
+    if (!cashDrawer.canProvideChange(changeDueCents)) {
+        const error = cannotProvideExactChange;
+        addTransaction(error.status, cartTotalCents, cashReceivedDollars);
+        return error;
+    }
 
     const changeCalculation = cashDrawer.calculateChange(changeDueCents);
-    if (!changeCalculation.isExact) return inexactChange;
+    if (!changeCalculation.isExact) {
+        const error = inexactChange;
+        addTransaction(error.status, cartTotalCents, cashReceivedDollars, changeCalculation);
+        return error;
+    }
 
     depositCashReceived(cashReceivedCents);
     cashDrawer.updateAfterTransaction(changeCalculation.change);
 
     const changeDueDollars = utils.toDollars(changeDueCents);
 
-    const transaction = {
-        status: STATUS.SUCCESS,
-        itemsCart: [...state.cart],
-        amount: utils.toDollars(cartTotalCents),
-        paid: cashReceivedDollars,
-        change: changeDueDollars,
-        changeBreakdown: changeCalculation.change,
-        changeAmount: changeDueDollars,
-        paymentMethod: 'Cash'
-    };
+    transaction = addTransaction(STATUS.SUCCESS, cartTotalCents, cashReceivedDollars, changeDueDollars, changeCalculation);
 
-    transactions.add(transaction);
     products.clearCart();
 
     return {
@@ -57,6 +73,23 @@ function processPurchase(cashReceivedDollars) {
         changeAmount: changeDueDollars,
         transaction
     };
+}
+
+const addTransaction = (status, cartTotalCents, cashReceivedDollars, changeDueDollars, changeCalculation) => {
+    const transaction = {
+        status: status,
+        itemsCart: [...state.cart],
+        amount: utils.toDollars(cartTotalCents),
+        paid: cashReceivedDollars,
+        change: changeDueDollars,
+        changeBreakdown: changeCalculation?.change,
+        changeAmount: changeDueDollars,
+        paymentMethod: 'Cash'
+    };
+
+    transactions.add(transaction);
+
+    return transaction;
 }
 
 const depositCashReceived = (cashReceivedCents) => {

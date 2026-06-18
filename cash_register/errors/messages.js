@@ -4,7 +4,7 @@ export const STATUS = Object.freeze({
     ERROR: 'ERROR',
     INSUFFICIENT_PAYMENT: 'INSUFFICIENT_PAYMENT',
     INSUFFICIENT_FUNDS: 'INSUFFICIENT_FUNDS',
-    SUCCESS: 'SUCCESS',
+    SUCCESS: 'SUCCESS'
 });
 
 const frozen = (status, message) => Object.freeze({status, message});
